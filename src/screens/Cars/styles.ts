@@ -16,7 +16,7 @@ export const Title = styled.Text`
   font-family: ${({theme}) => theme.font.family.primary};
   font-size: ${({theme}) => theme.font.size[9]};
   font-weight: ${({theme}) => theme.font.weight[700]};
-  color: ${({theme}) => theme.colors.primary[700]};
+  color: ${({theme}) => theme.colors.primary[600]};
 `;
 
 export const Subtitle = styled.Text`

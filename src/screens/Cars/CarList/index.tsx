@@ -1,27 +1,24 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {
   CarsList,
   CarItem,
   CarListRow,
   Wrapper,
-  CarItemHeader,
-  CarItemBrand,
-  CarItemModel,
-  CarItemYear,
-  CarItemBody,
   CarItemImage,
   CarItemImageWrapper,
   CarItemFooter,
   CarItemPrice,
-  CarItemFavorite,
+  CarItemName,
+  CarItemYear,
+  ViewContainer,
+  TextNoCars,
 } from './styles';
 
-//types
+// types
 import type {CarProps} from '@types/Cars';
 
-//components
-import Icon from 'react-native-vector-icons/FontAwesome';
+// components
+import Loading from '@components/Loading';
 
 export type CarItemProps = {
   id: number;
@@ -40,23 +37,14 @@ const RenderRow = ({item}: {item: CarItemProps}) => {
 
 const RenderItem = ({item}: {item: CarProps}) => {
   return (
-    <CarItem>
-      <CarItemHeader>
-        <CarItemBrand>{item.brand}</CarItemBrand>
-        <CarItemModel>{item.model}</CarItemModel>
-      </CarItemHeader>
-      <CarItemYear>{item.year}</CarItemYear>
-      <CarItemBody>
-        <CarItemImageWrapper>
-          <CarItemImage
-            source={{uri: item.thumbnail}}
-            onLoad={() => <Text>Carregando</Text>}
-          />
-        </CarItemImageWrapper>
-      </CarItemBody>
+    <CarItem activeOpacity={0.8}>
+      <CarItemImageWrapper>
+        <CarItemImage source={{uri: item.thumbnail}} />
+      </CarItemImageWrapper>
       <CarItemFooter>
         <CarItemPrice>R$ {item.price}</CarItemPrice>
-        <CarItemFavorite />
+        <CarItemName>{item.name}</CarItemName>
+        <CarItemYear>{item.year}</CarItemYear>
       </CarItemFooter>
     </CarItem>
   );
@@ -77,9 +65,17 @@ export default function CarsListComponent({
 
   return (
     <Wrapper>
-      {isFetching && <Text>Carregando...</Text>}
+      {isFetching && (
+        <ViewContainer>
+          <Loading />
+        </ViewContainer>
+      )}
 
-      {!isFetching && cars.length === 0 && <Text>Nenhum carro encontrado</Text>}
+      {!isFetching && cars.length === 0 && (
+        <ViewContainer>
+          <TextNoCars>Nenhum carro encontrado</TextNoCars>
+        </ViewContainer>
+      )}
 
       {!isFetching && cars.length > 0 && (
         <CarsList

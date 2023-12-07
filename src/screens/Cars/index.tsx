@@ -28,20 +28,7 @@ export default function App() {
 
   async function getCarsData(filter?: string) {
     setIsFetching(true);
-    const carsData = await getCars();
-
-    if (filter) {
-      const filteredCars = carsData.filter(
-        (car) =>
-          car.name.includes(filter) ||
-          car.model.includes(filter) ||
-          car.brand.includes(filter)
-      );
-      setCars(filteredCars);
-      setIsFetching(false);
-      return;
-    }
-
+    const carsData = await getCars({filter});
     setCars(carsData);
     setIsFetching(false);
   }
