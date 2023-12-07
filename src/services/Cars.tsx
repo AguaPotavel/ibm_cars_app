@@ -154,9 +154,24 @@ const carsMock: CarProps[] = [
 ];
 
 // fake API call
-export async function getCars(): Promise<CarProps[]> {
+export async function getCars({
+  filter,
+}: {
+  filter?: string;
+}): Promise<CarProps[]> {
   return new Promise((resolve) => {
     setTimeout(() => {
+      if (filter) {
+        const filteredCars = carsMock.filter(
+          (car) =>
+            car.name.includes(filter) ||
+            car.model.includes(filter) ||
+            car.brand.includes(filter)
+        );
+        resolve(filteredCars);
+        return;
+      }
+
       resolve(carsMock);
     }, 2000);
   });
