@@ -10,7 +10,7 @@
       "@screens/*": ["src/screens/*"],
       "@utils/*": ["src/utils/*"],
       "@styles/*": ["src/styles/*"],
-      "@types/*": ["src/types/*"],
+      "@models/*": ["src/models/*"],
       "@schemas/*": ["src/schemas/*"],
     }
   }

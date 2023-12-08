@@ -17,12 +17,17 @@ import Search from '@components/Search';
 import CarsListComponent from './CarList';
 
 //types
-import type {CarProps} from '@types/Cars';
+import type {CarProps} from '@models/Cars';
+import type {StackNavigationProp} from '@react-navigation/stack';
 
 //services
 import {getCars} from '@services/Cars';
 
-export default function App() {
+export default function App({
+  navigation,
+}: {
+  navigation: StackNavigationProp<any>;
+}) {
   const [cars, setCars] = useState<CarProps[]>([]);
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
@@ -60,7 +65,11 @@ export default function App() {
         </CreateNewAuction>
       </ActionArea>
 
-      <CarsListComponent cars={cars} isFetching={isFetching} />
+      <CarsListComponent
+        cars={cars}
+        isFetching={isFetching}
+        navigation={navigation}
+      />
     </Wrapper>
   );
 }

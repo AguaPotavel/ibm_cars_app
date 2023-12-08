@@ -1,6 +1,6 @@
 // tslint:disable-next-line: no-implicit-dependencies
 import React, {useEffect} from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 
 //components
 import Input from '@components/Form/Input';

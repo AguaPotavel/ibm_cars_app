@@ -1,4 +1,3 @@
-import {CarProps} from '@types/Cars';
 import {VirtualizedListProps} from 'react-native';
 import styled from 'styled-components/native';
 import type {CarItemProps} from './index';

@@ -7,6 +7,7 @@ import useAuth from './hooks/useAuth';
 //screens
 import Login from '@screens/Login';
 import Cars from '@screens/Cars';
+import CarDetails from '@screens/CarDetails';
 
 //providers
 import {ThemeProvider} from 'styled-components/native';
@@ -29,7 +30,20 @@ export default function App() {
           <Login />
         ) : (
           <Stack.Navigator initialRouteName="Carros">
-            <Stack.Screen name="Carros" component={Cars} />
+            <Stack.Screen
+              name="Carros"
+              component={Cars}
+              options={() => ({
+                title: 'MacCarro',
+              })}
+            />
+            <Stack.Screen
+              name="Details"
+              component={CarDetails}
+              options={({route}: {route: any}) => ({
+                title: route.params.car.name,
+              })}
+            />
           </Stack.Navigator>
         )}
       </NavigationContainer>
