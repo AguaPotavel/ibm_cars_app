@@ -58,10 +58,13 @@ export default function CarsListComponent({
   isFetching: boolean;
 }) {
   const getItemCount = (data: CarProps[]) => Math.ceil(data.length / 2);
-  const getItem = (data: CarProps[], index: number) => ({
-    id: index,
-    items: [data[index * 2], data[index * 2 + 1]],
-  });
+  const getItem = (data: CarProps[], index: number) => {
+    const items = data.slice(index * 2, index * 2 + 2);
+    return {
+      id: index,
+      items,
+    };
+  };
 
   return (
     <Wrapper>
