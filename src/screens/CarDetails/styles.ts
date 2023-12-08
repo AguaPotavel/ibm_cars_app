@@ -10,6 +10,22 @@ export const ScrollView = styled.ScrollView`
   margin-bottom: ${({theme}) => theme.spacing.px[15]};
 `;
 
+export const Content = styled.View`
+  flex: 1;
+  padding: ${({theme}) => theme.spacing.px[4]};
+`;
+
+export const Section = styled.View<{end?: boolean}>`
+  flex: 1;
+  align-items: ${({end}) => (end ? 'flex-end' : 'flex-start')};
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: ${({theme}) => theme.spacing.px[1]};
+`;
+
 export const PicturesSlider = styled.View`
   height: 250px;
   width: 100%;
@@ -39,11 +55,6 @@ export const SliderImage = styled.Image`
   resize-mode: cover;
 `;
 
-export const Content = styled.View`
-  flex: 1;
-  padding: ${({theme}) => theme.spacing.px[4]};
-`;
-
 export const ActionArea = styled.View`
   flex-direction: row;
   align-items: center;
@@ -60,11 +71,13 @@ export const CarName = styled.Text`
   color: ${({theme}) => theme.colors.base[900]};
 `;
 
-export const Row = styled.View`
-  flex-direction: row;
-  align-items: center;
-  padding-top: ${({theme}) => theme.spacing.px[1]};
-  padding-bottom: ${({theme}) => theme.spacing.px[1]};
+export const CarPrice = styled.Text`
+  font-family: ${({theme}) => theme.font.family.primary};
+  font-size: ${({theme}) => theme.font.size[5]};
+  color: ${({theme}) => theme.colors.primary[500]};
+  font-weight: ${({theme}) => theme.font.weight[700]};
+
+  margin-right: ${({theme}) => theme.spacing.px[1]};
 `;
 
 export const IconMap = styled(Icon).attrs({

@@ -4,7 +4,7 @@ export type CarProps = {
   brand: string;
   model: string;
   year: number;
-  price: number;
+  price: number | string;
   city: string;
   mileage?: number;
   fuel?: string;
@@ -12,3 +12,5 @@ export type CarProps = {
   thumbnail: string;
   photos: string[];
 };
+
+export type CarPropsCreate = Omit<CarProps, 'id'>;

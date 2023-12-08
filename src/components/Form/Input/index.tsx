@@ -1,5 +1,9 @@
 import React from 'react';
 
+// Masked Input
+import {formatWithMask} from 'react-native-mask-input';
+import type {Mask} from 'react-native-mask-input';
+
 // hooks
 import {Controller} from 'react-hook-form';
 import type {FieldErrors, FieldValues} from 'react-hook-form';
@@ -15,6 +19,7 @@ type InputProps = {
   label?: string;
   errors?: FieldErrors<FieldValues>;
   type?: string;
+  mask?: Mask;
 };
 
 const InputForm = ({
@@ -25,7 +30,17 @@ const InputForm = ({
   label,
   errors,
   type,
+  mask,
 }: InputProps) => {
+  const onChangeTextWithMask = (text: string) => {
+    let t = text;
+    if (!mask) {
+      return type === 'number' ? t.replace(/\D/g, '') : t;
+    }
+
+    return formatWithMask({text: text, mask: mask}).masked;
+  };
+
   return (
     <InputWrapper>
       <InputLabel>{label}</InputLabel>
@@ -35,10 +50,13 @@ const InputForm = ({
         render={({field: {onChange, onBlur, value}}) => (
           <Input
             onBlur={onBlur}
-            onChangeText={onChange}
+            onChangeText={(text) => {
+              onChange(onChangeTextWithMask(text));
+            }}
             value={value}
             placeholder={placeholder}
             secureTextEntry={type === 'password'}
+            keyboardType={type === 'number' ? 'numeric' : 'default'}
           />
         )}
         name={name}

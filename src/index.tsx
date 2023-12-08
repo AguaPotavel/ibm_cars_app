@@ -8,6 +8,7 @@ import useAuth from './hooks/useAuth';
 import Login from '@screens/Login';
 import Cars from '@screens/Cars';
 import CarDetails from '@screens/CarDetails';
+import CreateAuction from '@screens/CreateAuction';
 
 //providers
 import {ThemeProvider} from 'styled-components/native';
@@ -42,6 +43,13 @@ export default function App() {
               component={CarDetails}
               options={({route}: {route: any}) => ({
                 title: route.params.car.name,
+              })}
+            />
+            <Stack.Screen
+              name="createAuction"
+              component={CreateAuction}
+              options={() => ({
+                title: 'Criar Anúncio',
               })}
             />
           </Stack.Navigator>

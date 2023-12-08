@@ -46,6 +46,10 @@ export default function App({
     getCarsData(text);
   }
 
+  function handleCreateAuction() {
+    navigation.navigate('createAuction');
+  }
+
   return (
     <Wrapper>
       <Header>
@@ -61,7 +65,7 @@ export default function App({
           />
         </SearchArea>
         <CreateNewAuction>
-          <PrimaryButton title="+" onPress={() => {}} />
+          <PrimaryButton title="+" onPress={handleCreateAuction} />
         </CreateNewAuction>
       </ActionArea>
 

@@ -10,6 +10,7 @@ import {
   CarName,
   ActionArea,
   Content,
+  Section,
   Row,
   IconMap,
   CarCity,
@@ -18,6 +19,7 @@ import {
   CarInfoCard,
   CarInfoTitle,
   CarInfo,
+  CarPrice,
 } from './styles';
 import {useTheme} from 'styled-components/native';
 
@@ -27,6 +29,9 @@ import {CarProps} from '@models/Cars';
 // components
 import {PrimaryButton} from '@components/Button';
 import {SliderIndicator} from './SlideIndicator';
+
+// utils
+import {Masks, formatWithMask} from 'react-native-mask-input';
 
 const renderImage = ({item}: any) => {
   return (
@@ -72,10 +77,25 @@ export default function CarDetails({route}: {route: any}) {
           <SliderIndicator current={currentSlide} total={car.photos.length} />
         </PicturesSlider>
         <Content>
-          <CarName>{car.name}</CarName>
           <Row>
-            <IconMap name="map-pin" />
-            <CarCity>{car.city}</CarCity>
+            <Section>
+              <CarName>{car.name}</CarName>
+              <Row>
+                <IconMap name="map-pin" />
+                <CarCity>{car.city}</CarCity>
+              </Row>
+            </Section>
+
+            <Section end>
+              <CarPrice>
+                {
+                  formatWithMask({
+                    text: car.price.toString(),
+                    mask: Masks.BRL_CURRENCY,
+                  }).masked as string
+                }
+              </CarPrice>
+            </Section>
           </Row>
 
           <CarInfoWrapper>
