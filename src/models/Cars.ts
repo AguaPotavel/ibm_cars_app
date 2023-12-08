@@ -6,6 +6,9 @@ export type CarProps = {
   year: number;
   price: number;
   city: string;
+  mileage?: number;
+  fuel?: string;
+  gear?: string;
   thumbnail: string;
   photos: string[];
 };
