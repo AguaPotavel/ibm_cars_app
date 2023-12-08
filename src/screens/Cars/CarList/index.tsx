@@ -21,6 +21,9 @@ import type {StackNavigationProp} from '@react-navigation/stack';
 // components
 import Loading from '@components/Loading';
 
+// utils
+import {Masks, formatWithMask} from 'react-native-mask-input';
+
 export type CarItemProps = {
   id: number;
   items: CarProps[];
@@ -55,7 +58,14 @@ const RenderItem = ({
         <CarItemImage source={{uri: item.thumbnail}} />
       </CarItemImageWrapper>
       <CarItemFooter>
-        <CarItemPrice>R$ {item.price}</CarItemPrice>
+        <CarItemPrice>
+          {
+            formatWithMask({
+              text: item.price.toString(),
+              mask: Masks.BRL_CURRENCY,
+            }).masked as string
+          }
+        </CarItemPrice>
         <CarItemName>{item.name}</CarItemName>
         <CarItemYear>{item.year}</CarItemYear>
       </CarItemFooter>
