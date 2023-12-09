@@ -18,7 +18,7 @@ export const Input = styled.TextInput`
   height: ${({theme}) => theme.spacing.px[14]};
   font-size: ${({theme}) => theme.font.size[2]};
   color: ${({theme}) => theme.colors.base[1000]};
-  background-color: ${({theme}) => theme.colors.base[200]};
+  background-color: ${({theme}) => theme.colors.base[300]};
   padding: ${({theme}) => theme.spacing.px[3]};
   border-radius: ${({theme}) => theme.borderRadius[3]};
 `;

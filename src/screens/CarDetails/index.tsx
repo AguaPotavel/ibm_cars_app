@@ -27,7 +27,7 @@ import {useTheme} from 'styled-components/native';
 import {CarProps} from '@models/Cars';
 
 // components
-import {PrimaryButton} from '@components/Button';
+import Button from '@components/Button';
 import {SliderIndicator} from './SlideIndicator';
 
 // utils
@@ -133,9 +133,10 @@ export default function CarDetails({route}: {route: any}) {
       </ScrollView>
 
       <ActionArea>
-        <PrimaryButton
+        <Button
           title="Entrar em contato"
           onPress={() => console.log('alugou')}
+          type="primary"
         />
       </ActionArea>
     </Wrapper>

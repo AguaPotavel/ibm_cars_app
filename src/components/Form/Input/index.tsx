@@ -11,7 +11,7 @@ import type {FieldErrors, FieldValues} from 'react-hook-form';
 // styles
 import {InputWrapper, InputLabel, Input, InputError} from './styles';
 
-type InputProps = {
+export type InputProps = {
   placeholder: string;
   control: any;
   name: string;
@@ -33,9 +33,8 @@ const InputForm = ({
   mask,
 }: InputProps) => {
   const onChangeTextWithMask = (text: string) => {
-    let t = text;
     if (!mask) {
-      return type === 'number' ? t.replace(/\D/g, '') : t;
+      return type === 'number' ? parseInt(text) : text;
     }
 
     return formatWithMask({text: text, mask: mask}).masked;
@@ -57,6 +56,7 @@ const InputForm = ({
             placeholder={placeholder}
             secureTextEntry={type === 'password'}
             keyboardType={type === 'number' ? 'numeric' : 'default'}
+            returnKeyType="next"
           />
         )}
         name={name}

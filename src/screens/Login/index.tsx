@@ -4,7 +4,7 @@ import {Text} from 'react-native';
 
 //components
 import Input from '@components/Form/Input';
-import {PrimaryButton} from '@components/Button';
+import Button from '@components/Button';
 
 //hooks
 import {useForm} from 'react-hook-form';
@@ -27,7 +27,7 @@ export default function App() {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = () => {
     setLogged(true);
   };
 
@@ -58,7 +58,7 @@ export default function App() {
         type="password"
       />
 
-      <PrimaryButton title="Entrar" onPress={handleSubmit(onSubmit)} />
+      <Button title="Entrar" onPress={handleSubmit(onSubmit)} type="primary" />
     </Wrapper>
   );
 }

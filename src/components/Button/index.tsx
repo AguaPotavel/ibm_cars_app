@@ -6,9 +6,10 @@ type ButtonProps = {
   title: string;
   onPress: () => void;
   disabled?: boolean;
+  type?: 'primary' | 'secondary';
 };
 
-export const PrimaryButton = ({title, onPress, disabled}: ButtonProps) => {
+export default function Button({title, onPress, disabled, type}: ButtonProps) {
   const theme = useTheme();
   const handlePress = () => {
     if (disabled) {
@@ -19,8 +20,12 @@ export const PrimaryButton = ({title, onPress, disabled}: ButtonProps) => {
   };
 
   return (
-    <Wrapper onPress={handlePress} disabled={disabled} activeOpacity={0.7}>
+    <Wrapper
+      onPress={handlePress}
+      disabled={disabled}
+      activeOpacity={0.7}
+      type={type}>
       <Label color={theme.colors.base[100]}>{title}</Label>
     </Wrapper>
   );
-};
+}

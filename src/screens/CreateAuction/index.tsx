@@ -1,13 +1,23 @@
-import React, {useState} from 'react';
-import {Container, Wrapper} from './styles';
+import React, {useEffect, useState, useRef} from 'react';
+import {
+  FormActionsWrapper,
+  FormActionsButton,
+  Wrapper,
+  FormSlider,
+  FormSliderItem,
+  FormSliderTitle,
+} from './styles';
 
 // hooks
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useTheme} from 'styled-components/native';
+import {Toast} from 'toastify-react-native';
 
 // components
 import Input from '@components/Form/Input';
-import {PrimaryButton} from '@components/Button';
+import Button from '@components/Button';
+import ImagePicker from '@components/Form/ImagePicker';
 
 //schemas
 import {createAuctionSchema} from '@schemas/createAuction';
@@ -15,111 +25,225 @@ import {createAuctionSchema} from '@schemas/createAuction';
 // Mask
 import {Masks} from 'react-native-mask-input';
 
+// models
+import {FormCreateAuctionProps, FormCreateAuctionItem} from './form';
+import {FlatList} from 'react-native';
+import {ImagePickerProps} from '@components/Form/ImagePicker';
+
+// CONSTANTS
+const SLIDERS_LENGHT = 4;
+
+const RenderItem = ({item}: any) => {
+  const {fields, title, isPicker, pickerField} = item;
+
+  return (
+    <FormSliderItem>
+      <FormSliderTitle>{title}</FormSliderTitle>
+
+      {!isPicker &&
+        fields.map((field: any) => (
+          <Input
+            key={field.name}
+            name={field.name}
+            label={field.label}
+            placeholder={field.placeholder}
+            type={field.type}
+            mask={field.mask}
+            control={field.control}
+            errors={field.errors}
+          />
+        ))}
+
+      {isPicker && (
+        <ImagePicker
+          setValue={pickerField.setValue}
+          name={pickerField.name}
+          errors={pickerField.errors}
+        />
+      )}
+    </FormSliderItem>
+  );
+};
+
 export default function CreateAuction() {
+  const {dimensions} = useTheme();
   const {
     control,
     handleSubmit,
+    setValue,
     formState: {errors},
   } = useForm({
     resolver: zodResolver(createAuctionSchema),
   });
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const FormSliderRef = useRef<FlatList<FormCreateAuctionItem>>(null);
 
   const handleCreateAuction = (data: any) => {
     // Lógica para criar o anúncio de carro
-    console.log('Anúncio de carro criado!');
+    console.log('Anúncio de carro criado!', data);
+  };
+
+  useEffect(() => {
+    FormSliderRef.current?.scrollToIndex({
+      index: currentSlide,
+      animated: true,
+    });
+  }, [currentSlide]);
+
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) {
+      Toast.error('Preencha os campos corretamente!', 'top');
+    }
+
+    console.log(errors);
+  }, [errors]);
+
+  const Form: FormCreateAuctionProps = {
+    items: [
+      {
+        title: 'Dados do veículo',
+        fields: [
+          {
+            name: 'name',
+            label: 'Nome',
+            placeholder: 'Digite o nome do carro',
+            type: 'text',
+            control: control,
+            errors: errors,
+          },
+          {
+            name: 'brand',
+            label: 'Marca',
+            placeholder: 'Qual a marca do carro?',
+            type: 'text',
+            control: control,
+            errors: errors,
+          },
+          {
+            name: 'model',
+            label: 'Modelo',
+            placeholder: 'Qual o modelo do carro?',
+            type: 'text',
+            control: control,
+            errors: errors,
+          },
+          {
+            name: 'year',
+            label: 'Ano',
+            placeholder: 'Qual o ano do carro?',
+            type: 'number',
+            control: control,
+            errors: errors,
+          },
+        ],
+      },
+      {
+        title: 'Dados para compra',
+        fields: [
+          {
+            name: 'price',
+            label: 'Preço',
+            placeholder: 'Qual valor você quer no seu carro?',
+            type: 'text',
+            mask: Masks.BRL_CURRENCY,
+            control: control,
+            errors: errors,
+          },
+          {
+            name: 'city',
+            label: 'Cidade',
+            placeholder: 'Qual a cidade está o seu carro?',
+            type: 'text',
+            control: control,
+            errors: errors,
+          },
+        ],
+      },
+      {
+        title: 'Informações opcionais',
+        fields: [
+          {
+            name: 'mileage',
+            label: 'Km',
+            placeholder: 'Quantos km tem o seu carro?',
+            type: 'number',
+            control: control,
+            errors: errors,
+          },
+          {
+            name: 'gear',
+            label: 'Câmbio',
+            placeholder: 'Qual o câmbio do seu carro?',
+            type: 'text',
+            control: control,
+            errors: errors,
+          },
+          {
+            name: 'fuel',
+            label: 'Combústivel',
+            placeholder: 'Qual o combústivel do seu carro?',
+            type: 'text',
+            control: control,
+            errors: errors,
+          },
+        ],
+      },
+      {
+        title: 'Fotos do veículo',
+        fields: [],
+        pickerField: {
+          name: 'photos',
+          setValue: setValue,
+          errors: errors,
+        },
+        isPicker: true,
+      },
+    ],
+    onSubmit: handleCreateAuction,
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlide((old) => (old >= SLIDERS_LENGHT - 1 ? old : old + 1));
+  };
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((old) => (old <= 0 ? old : old - 1));
   };
 
   return (
     <Wrapper>
-      <Container>
-        <Input
-          placeholder="Digite o nome do carro"
-          control={control}
-          name="name"
-          defaultValue=""
-          label="Nome"
-          errors={errors}
-        />
+      <FormSlider
+        ref={FormSliderRef}
+        data={Form.items}
+        renderItem={RenderItem}
+        keyExtractor={(item: any) => item.title}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        scrollEnabled={false}
+        snapToInterval={dimensions.width}
+        snapToAlignment="start"
+        decelerationRate="fast"
+      />
 
-        <Input
-          placeholder="Qual a marca do carro?"
-          control={control}
-          name="brand"
-          defaultValue=""
-          label="Marca"
-          errors={errors}
-        />
+      <FormActionsWrapper>
+        {currentSlide > 0 && (
+          <FormActionsButton>
+            <Button title="Voltar" onPress={handlePrevSlide} />
+          </FormActionsButton>
+        )}
 
-        <Input
-          placeholder="Qual o modelo do carro?"
-          control={control}
-          name="model"
-          defaultValue=""
-          label="Modelo"
-          errors={errors}
-        />
-
-        <Input
-          placeholder="Qual a cidade está o seu carro?"
-          control={control}
-          name="city"
-          defaultValue=""
-          label="Cidade"
-          errors={errors}
-        />
-
-        <Input
-          placeholder="Qual valor você quer no seu carro?"
-          control={control}
-          name="price"
-          defaultValue=""
-          label="Preço"
-          errors={errors}
-          mask={Masks.BRL_CURRENCY}
-        />
-
-        <Input
-          placeholder="Qual o ano do seu carro"
-          control={control}
-          name="year"
-          defaultValue=""
-          label="Ano"
-          errors={errors}
-          type="number"
-        />
-
-        <Input
-          placeholder="Qual o combustível do seu carro?"
-          control={control}
-          name="fuel"
-          defaultValue=""
-          label="Combustível"
-          errors={errors}
-        />
-
-        <Input
-          placeholder="Qual o câmbio do seu carro?"
-          control={control}
-          name="gear"
-          defaultValue=""
-          label="Câmbio"
-          errors={errors}
-        />
-
-        <Input
-          placeholder="Qual A kilometragem do seu carro?"
-          control={control}
-          name="mileage"
-          defaultValue=""
-          label="Kilometragem"
-          errors={errors}
-        />
-
-        <PrimaryButton
-          title="Criar anúncio"
-          onPress={handleSubmit(handleCreateAuction)}
-        />
-      </Container>
+        <FormActionsButton>
+          <Button
+            title={currentSlide === SLIDERS_LENGHT - 1 ? 'Criar' : 'Próximo'}
+            onPress={
+              currentSlide === SLIDERS_LENGHT - 1
+                ? handleSubmit(Form.onSubmit)
+                : handleNextSlide
+            }
+            type="primary"
+          />
+        </FormActionsButton>
+      </FormActionsWrapper>
     </Wrapper>
   );
 }

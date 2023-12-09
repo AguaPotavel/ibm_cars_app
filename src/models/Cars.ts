@@ -13,4 +13,4 @@ export type CarProps = {
   photos: string[];
 };
 
-export type CarPropsCreate = Omit<CarProps, 'id'>;
+export type CarPropsCreate = Omit<CarProps, 'id' | 'thumbnail'>;

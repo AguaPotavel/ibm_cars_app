@@ -12,7 +12,7 @@ import {
 } from './styles';
 
 //components
-import {PrimaryButton} from '@components/Button';
+import Button from '@components/Button';
 import Search from '@components/Search';
 import CarsListComponent from './CarList';
 
@@ -65,7 +65,7 @@ export default function App({
           />
         </SearchArea>
         <CreateNewAuction>
-          <PrimaryButton title="+" onPress={handleCreateAuction} />
+          <Button title="+" onPress={handleCreateAuction} type="primary" />
         </CreateNewAuction>
       </ActionArea>
 
