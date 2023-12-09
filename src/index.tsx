@@ -36,9 +36,9 @@ export default function App() {
         {!isLogged ? (
           <Login />
         ) : (
-          <Stack.Navigator initialRouteName="Carros">
+          <Stack.Navigator initialRouteName="Cars">
             <Stack.Screen
-              name="Carros"
+              name="Cars"
               component={Cars}
               options={() => ({
                 title: 'MacCarro',

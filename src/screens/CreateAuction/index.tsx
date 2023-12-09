@@ -9,7 +9,7 @@ import {
 } from './styles';
 
 // hooks
-import {useForm} from 'react-hook-form';
+import {set, useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useTheme} from 'styled-components/native';
 import {Toast} from 'toastify-react-native';
@@ -28,7 +28,9 @@ import {Masks} from 'react-native-mask-input';
 // models
 import {FormCreateAuctionProps, FormCreateAuctionItem} from './form';
 import {FlatList} from 'react-native';
-import {ImagePickerProps} from '@components/Form/ImagePicker';
+
+// navigation
+import type {StackNavigationProp} from '@react-navigation/stack';
 
 // CONSTANTS
 const SLIDERS_LENGHT = 4;
@@ -65,7 +67,11 @@ const RenderItem = ({item}: any) => {
   );
 };
 
-export default function CreateAuction() {
+export default function CreateAuction({
+  navigation,
+}: {
+  navigation: StackNavigationProp<any>;
+}) {
   const {dimensions} = useTheme();
   const {
     control,
@@ -79,8 +85,9 @@ export default function CreateAuction() {
   const FormSliderRef = useRef<FlatList<FormCreateAuctionItem>>(null);
 
   const handleCreateAuction = (data: any) => {
-    // Lógica para criar o anúncio de carro
-    console.log('Anúncio de carro criado!', data);
+    console.log(data);
+    Toast.success('Anúncio de carro criado!', 'top');
+    navigation.navigate('Cars');
   };
 
   useEffect(() => {
