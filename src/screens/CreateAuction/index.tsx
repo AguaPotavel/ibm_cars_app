@@ -9,7 +9,7 @@ import {
 } from './styles';
 
 // hooks
-import {set, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useTheme} from 'styled-components/native';
 import {Toast} from 'toastify-react-native';

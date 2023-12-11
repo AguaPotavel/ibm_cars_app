@@ -70,6 +70,7 @@ const InputForm = ({
             secureTextEntry={type === 'password'}
             keyboardType={type === 'number' ? 'numeric' : 'default'}
             returnKeyType="next"
+            onSubmitEditing={() => {}}
           />
         )}
         name={name}

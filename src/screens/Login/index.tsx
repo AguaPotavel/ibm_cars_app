@@ -15,7 +15,16 @@ import useAuth from '@hooks/useAuth';
 import {loginSchema} from '@schemas/login';
 
 //styles
-import {Wrapper} from './styles';
+import {
+  Wrapper,
+  SVGWrapper,
+  LoginTextWrapper,
+  LoginText,
+  FormWrapper,
+  ButtonWrapper,
+} from './styles';
+
+import LogoSVG from './../../../assets/cars.svg';
 
 export default function App() {
   const {setLogged} = useAuth();
@@ -37,28 +46,41 @@ export default function App() {
 
   return (
     <Wrapper>
-      <Text>Login</Text>
+      <FormWrapper>
+        <SVGWrapper>
+          <LogoSVG width={240} />
+        </SVGWrapper>
+        <LoginTextWrapper>
+          <LoginText>Entre com o seu email e senha</LoginText>
+        </LoginTextWrapper>
 
-      <Input
-        placeholder="Digite seu email"
-        control={control}
-        name="email"
-        defaultValue=""
-        label="Email"
-        errors={errors}
-      />
+        <Input
+          placeholder="Digite seu email"
+          control={control}
+          name="email"
+          defaultValue=""
+          label="Email"
+          errors={errors}
+        />
 
-      <Input
-        placeholder="Digite sua senha"
-        control={control}
-        name="password"
-        defaultValue=""
-        label="Senha"
-        errors={errors}
-        type="password"
-      />
+        <Input
+          placeholder="Digite sua senha"
+          control={control}
+          name="password"
+          defaultValue=""
+          label="Senha"
+          errors={errors}
+          type="password"
+        />
+      </FormWrapper>
 
-      <Button title="Entrar" onPress={handleSubmit(onSubmit)} type="primary" />
+      <ButtonWrapper>
+        <Button
+          title="Entrar"
+          onPress={handleSubmit(onSubmit)}
+          type="primary"
+        />
+      </ButtonWrapper>
     </Wrapper>
   );
 }
