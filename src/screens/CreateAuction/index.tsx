@@ -77,6 +77,7 @@ export default function CreateAuction({
     control,
     handleSubmit,
     setValue,
+    reset,
     formState: {errors},
   } = useForm({
     resolver: zodResolver(createAuctionSchema),
@@ -87,6 +88,7 @@ export default function CreateAuction({
   const handleCreateAuction = (data: any) => {
     console.log(data);
     Toast.success('Anúncio de carro criado!', 'top');
+    reset();
     navigation.navigate('Cars');
   };
 

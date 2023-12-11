@@ -6,7 +6,7 @@ type AuthState = {
 };
 
 const useAuth = create<AuthState>((set) => ({
-  isLogged: true,
+  isLogged: false,
   setLogged: (isLogged) => set({isLogged}),
 }));
 
