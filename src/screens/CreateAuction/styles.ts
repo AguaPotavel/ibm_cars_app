@@ -11,13 +11,15 @@ export const FormSlider = styled.FlatList`
   width: 100%;
 `;
 
-export const FormSliderItem = styled.ScrollView`
+export const FormSliderItem = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    gap: 8,
+  },
+})`
   flex: 1;
   height: 100%;
   width: ${({theme}) => theme.dimensions.width - theme.spacing.number[8]}px;
   margin-right: ${({theme}) => theme.spacing.px[4]};
-  gap: ${({theme}) => theme.spacing.px[8]};
-  /* background-color: red; */
 `;
 
 export const FormActionsWrapper = styled.View`

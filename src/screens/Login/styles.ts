@@ -13,12 +13,14 @@ export const SVGWrapper = styled.View`
   align-items: center;
 `;
 
-export const FormWrapper = styled.View`
-  flex: 1;
-  justify-content: center;
-  gap: ${({theme}) => theme.spacing.px[4]};
-  align-items: center;
-`;
+export const FormWrapper = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 16,
+  },
+})``;
 
 export const LoginTextWrapper = styled.View`
   justify-content: center;

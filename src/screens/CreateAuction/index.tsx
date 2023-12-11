@@ -1,4 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
+
+// styles
 import {
   FormActionsWrapper,
   FormActionsButton,
@@ -25,7 +27,7 @@ import {createAuctionSchema} from '@schemas/createAuction';
 // Mask
 import {Masks} from 'react-native-mask-input';
 
-// models
+// types
 import {FormCreateAuctionProps, FormCreateAuctionItem} from './form';
 import {FlatList} from 'react-native';
 
@@ -153,7 +155,7 @@ export default function CreateAuction({
             name: 'price',
             label: 'Preço',
             placeholder: 'Qual valor você quer no seu carro?',
-            type: 'text',
+            type: 'number',
             mask: Masks.BRL_CURRENCY,
             control: control,
             errors: errors,

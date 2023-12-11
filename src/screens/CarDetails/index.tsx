@@ -23,7 +23,7 @@ import {
 } from './styles';
 import {useTheme} from 'styled-components/native';
 
-// models
+// stypes
 import {CarProps} from '@models/Cars';
 
 // components
