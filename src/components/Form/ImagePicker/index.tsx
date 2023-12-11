@@ -28,6 +28,13 @@ export type ImagePickerProps = {
   errors?: FieldErrors<FieldValues>;
 };
 
+/**
+ * @param {ImagePickerProps} props - ImagePicker props
+ * @param {string} props.name - ImagePicker name
+ * @param {(name: string, value: any) => void} props.setValue - ImagePicker setValue function
+ * @param {FieldErrors<FieldValues>} [props.errors] - ImagePicker errors
+ * @returns {React.ReactElement}
+ */
 export default function ImagePicker({
   setValue,
   name,

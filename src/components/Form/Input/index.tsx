@@ -22,6 +22,19 @@ export type InputProps = {
   mask?: Mask;
 };
 
+/**
+ * @param {InputProps} props - Input props
+ * @param {string} props.placeholder - Input placeholder
+ * @param {any} props.control - Input control
+ * @param {string} props.name - Input name
+ * @param {string} [props.defaultValue] - Input defaultValue
+ * @param {string} [props.label] - Input label
+ * @param {FieldErrors<FieldValues>} [props.errors] - Input errors
+ * @param {string} [props.type] - Input type
+ * @param {Mask} [props.mask] - Input mask
+ * @returns {React.ReactElement}
+ */
+
 const InputForm = ({
   placeholder,
   control,
