@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
+import {Animated} from 'react-native';
 
-export const InputWrapper = styled.View`
+export const InputWrapper = styled(Animated.View)`
   width: 100%;
   height: fit-content;
   justify-content: flex-start;
@@ -8,7 +9,7 @@ export const InputWrapper = styled.View`
   gap: ${({theme}) => theme.spacing.px[1]};
 `;
 
-export const InputLabel = styled.Text`
+export const InputLabel = styled(Animated.Text)`
   font-size: ${({theme}) => theme.font.size[3]};
   color: ${({theme}) => theme.colors.base[1000]};
 `;

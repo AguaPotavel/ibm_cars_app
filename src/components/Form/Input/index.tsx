@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {useRef} from 'react';
+
+// native
+import {Animated} from 'react-native';
 
 // Masked Input
 import {formatWithMask} from 'react-native-mask-input';
@@ -47,15 +50,50 @@ const InputForm = ({
 }: InputProps) => {
   const onChangeTextWithMask = (text: string) => {
     if (!mask) {
-      return type === 'number' ? parseInt(text) : text;
+      return type === 'number' ? parseInt(text || '0') : text;
     }
 
     return formatWithMask({text: text, mask: mask}).masked;
   };
 
+  const opacityAnimation = useRef(new Animated.Value(0)).current;
+  const translateYAnimation = useRef(new Animated.Value(-20)).current;
+
+  const animateInput = () => {
+    Animated.timing(opacityAnimation, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const animateLabel = () => {
+    Animated.timing(translateYAnimation, {
+      toValue: 0,
+      duration: 500,
+      delay: 100,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  animateInput();
+  animateLabel();
+
   return (
-    <InputWrapper>
-      <InputLabel>{label}</InputLabel>
+    <InputWrapper style={{opacity: opacityAnimation}}>
+      <InputLabel
+        style={{
+          transform: [
+            {
+              translateY: translateYAnimation.interpolate({
+                inputRange: [-20, 0],
+                outputRange: [-20, 0],
+              }),
+            },
+          ],
+        }}>
+        {label}
+      </InputLabel>
 
       <Controller
         control={control}
@@ -70,7 +108,6 @@ const InputForm = ({
             secureTextEntry={type === 'password'}
             keyboardType={type === 'number' ? 'numeric' : 'default'}
             returnKeyType="next"
-            onSubmitEditing={() => {}}
           />
         )}
         name={name}
