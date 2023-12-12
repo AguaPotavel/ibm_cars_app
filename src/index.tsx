@@ -1,7 +1,7 @@
 import React from 'react';
 import {useWindowDimensions} from 'react-native';
 
-//
+// icons
 import 'react-native-vector-icons/Ionicons';
 
 //hooks
@@ -41,7 +41,7 @@ export default function App() {
               name="Cars"
               component={Cars}
               options={() => ({
-                title: 'MacCarro',
+                title: 'Carros',
               })}
             />
             <Stack.Screen

@@ -105,8 +105,6 @@ export default function CreateAuction({
     if (Object.keys(errors).length > 0) {
       Toast.error('Preencha os campos corretamente!', 'top');
     }
-
-    console.log(errors);
   }, [errors]);
 
   const Form: FormCreateAuctionProps = {

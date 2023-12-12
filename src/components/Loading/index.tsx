@@ -1,6 +1,9 @@
 import React from 'react';
 import LottieView from 'lottie-react-native';
 
+/**
+ * @returns {React.ReactElement}
+ */
 export default function Loading() {
   return (
     <LottieView
