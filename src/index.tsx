@@ -62,7 +62,7 @@ export default function App() {
         )}
       </NavigationContainer>
 
-      <ToastManager height={72} position={'top'} hasBackdrop />
+      <ToastManager height={84} width={300} position={'top'} hasBackdrop />
     </ThemeProvider>
   );
 }

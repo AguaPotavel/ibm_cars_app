@@ -21,6 +21,8 @@ import {
   CarInfo,
   CarPrice,
 } from './styles';
+
+// hooks
 import {useTheme} from 'styled-components/native';
 
 // types
@@ -32,6 +34,7 @@ import {SliderIndicator} from './SlideIndicator';
 
 // utils
 import {Masks, formatWithMask} from 'react-native-mask-input';
+import { Toast } from 'toastify-react-native';
 
 const renderImage = ({item}: any) => {
   return (
@@ -135,7 +138,9 @@ export default function CarDetails({route}: {route: any}) {
       <ActionArea>
         <Button
           title="Entrar em contato"
-          onPress={() => console.log('alugou')}
+          onPress={() => {
+            Toast.success('O Vendedor foi notificado do seu interesse!');
+          }}
           type="primary"
         />
       </ActionArea>
