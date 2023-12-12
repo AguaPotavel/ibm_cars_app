@@ -34,7 +34,7 @@ import {SliderIndicator} from './SlideIndicator';
 
 // utils
 import {Masks, formatWithMask} from 'react-native-mask-input';
-import { Toast } from 'toastify-react-native';
+import {Toast} from 'toastify-react-native';
 
 const renderImage = ({item}: any) => {
   return (

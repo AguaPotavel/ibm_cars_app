@@ -1,6 +1,4 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import React, {useEffect} from 'react';
-import {Text} from 'react-native';
 
 //components
 import Input from '@components/Form/Input';
@@ -24,6 +22,7 @@ import {
   ButtonWrapper,
 } from './styles';
 
+//assets
 import LogoSVG from './../../../assets/cars.svg';
 
 export default function App() {
