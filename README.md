@@ -1,79 +1,128 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+<div aling="center">
+<img src="/assets/cars.svg" alt="MarineGEO circle logo" style="height: 100px; width:100%;"/>
+</div>
 
-# Getting Started
+---
+<div align="center">
+  <strong>
+  Aplicativo do Concurso "Masters of frontend" da IBM
+  </strong>
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+  <p align="center">
+    <a href="#sobre">Sobre</a>&nbsp;&nbsp;&nbsp;&#149;&nbsp;&nbsp;&nbsp;
+    <a href="#estrutura-de-pastas">Estrutura de pastas</a>&nbsp;&nbsp;&nbsp;&#149;&nbsp;&nbsp;&nbsp;
+    <a href="#instalação">Instalação</a>&nbsp;&nbsp;&nbsp;&#149;&nbsp;&nbsp;&nbsp;
+    <a href="#observações">Observações</a>&nbsp;&nbsp;&nbsp;&#149;&nbsp;&nbsp;&nbsp;
+    <a href="#tecnologias-utilizadas">Tecnologias Utilizadas</a>&nbsp;&nbsp;&nbsp;&#149;&nbsp;&nbsp;&nbsp;
+    <a href="#screenshots">Screenshots</a>&nbsp;&nbsp;&nbsp;&#149;&nbsp;&nbsp;&nbsp;
+   </p>
+</div>
 
-## Step 1: Start the Metro Server
+---
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+<div align="center">
+  <img src="/Docs/Gifs/login.gif" alt="MarineGEO circle logo" style="width: 250px"/>
+  <img src="/Docs/Gifs/criar_anuncio.gif" alt="MarineGEO circle logo" style="width: 250px"/>
+</div>
 
-To start Metro, run the following command from the _root_ of your React Native project:
+# Sobre
+
+Este é um projeto simplificado que oferece aos usuários a capacidade de realizar login na aplicação, explorar anúncios de carros, visualizar detalhes específicos dos veículos e criar seus próprios anúncios.
+
+# Estrutura de pastas
 
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+├── src                                    # Contém código fonte do projeto
+│   ├── styles                             # Configuração de estilos globais  
+│   ├── screens
+│   │   ├── CarDetails                     #  Tela de detalhes dos carros.
+│   │   │   └── SlideIndicator             #  Abstração do componente de indicador do slide de carros.
+│   │   ├── Cars                           #  Tela que lista todos os anúncios.
+│   │   │   └── CarList                    #  Abstração da lista de carros.
+│   │   ├── CreateAuction                  #  Tela de Criação de um novo anúncio
+│   │   └── Login                          #  Tela de Login no aplicativo
+│   ├── services
+│   │   └── Cars.tsx                       #  Service fake para recuperar os carros da API
+│   ├── hooks
+│   │   └── useAuth.tsx                    #  Estado que define se o usuário está ou não Loggado
+│   ├── components                         #  Componentes reutilizaveis da aplicação
+│   ├── models                             
+│   │   └── Cars.ts                        #  Tipos do objeto carro para validações em outros componentes
+│   ├── schemas                            #  Schemas de validações dos formulários
+│   └── index.tsx
+|
+...
+├── Docs                                   # Materiais da documentação
+├── assets                                 # Assets da aplicação
+....
 ```
 
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
+# Instalação
 
 ```bash
-# using npm
+npm install
 npm run android
-
-# OR using Yarn
-yarn android
+npm start
 ```
 
-### For iOS
+# Observações
 
-```bash
-# using npm
-npm run ios
+Embora o aplicativo tenha sido desenvolvido em React Native, sua compatibilidade, por enquanto, está restrita ao sistema Android. Infelizmente, não tenho um MacBook disponível no momento para corrigir problemas específicos relacionados à plataforma iOS.
 
-# OR using Yarn
-yarn ios
-```
+# Tecnologias utilizadas
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+- React Native (Framework Principal)
+- Styled-components (Utilizado para estilização)
+- React-hook-form e Zod (Gerenciamento de formulários e validações)
+- Typescript (Programação com tipos)
+- Zustand (Gerenciamento de estados da aplicação)
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+# Screenshots
 
-## Step 3: Modifying your App
+## Login com validação de schema
 
-Now that you have successfully run the app, let's modify it.
+<h1 align="center">
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503513.png" width="250px" />
+    <img alt="invalid" src="./Docs/Screenshots/Screenshot_1702503520.png" width="250px" />
+</h1>
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+## Lista de carros com filtro por nome, marca ou modelo
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+<h1 align="center">
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503551.png" width="250px" />
+    <img alt="invalid" src="./Docs/Screenshots/Screenshot_1702503562.png" width="250px" />
+</h1>
 
-## Congratulations! :tada:
+## Visualizar carro específico e notificar o vendedor
 
-You've successfully run and modified your React Native App. :partying_face:
+<h1 align="center">
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503568.png" width="170px" />
+    <img alt="invalid" src="./Docs/Screenshots/Screenshot_1702503573.png" width="170px" />
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503577.png" width="170px" />
+</h1>
 
-### Now what?
+## Criar novo Anúncio
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+<h1 align="center">
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503604.png" width="250px" />
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503607.png" width="250px" />
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503610.png" width="250px" />
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503613.png" width="250px" />
+</h1>
 
-# Troubleshooting
+## Criar novo anúncio com erro no schema
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+<h1 align="center">
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503641.png" width="250px" />
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503648.png" width="250px" />
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503652.png" width="250px" />
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503658.png" width="250px" />
+</h1>
 
-# Learn More
+## Adicionando foto e validando
 
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+<h1 align="center">
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503699.png" width="170px" />
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503706.png" width="170px" />
+    <img alt="valid" src="./Docs/Screenshots/Screenshot_1702503717.png" width="170px" />
+</h1>
