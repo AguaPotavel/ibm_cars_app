@@ -5,7 +5,7 @@
 ---
 <div align="center">
   <strong>
-  Aplicativo do Concurso "Masters of frontend" da IBM
+  Aplicativo do Concurso "Master of frontend" da IBM
   </strong>
 
   <p align="center">
